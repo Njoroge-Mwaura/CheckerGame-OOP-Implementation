@@ -1,6 +1,6 @@
 # Checkers-OOP
 
-A simple, terminal-based Checkers game implemented in Python, structured to follow the SOLID principles. The project focuses on clarity, maintainability, and extensibility while keeping the core gameplay minimal and easy to run.
+A simple, Graphical Interphase Checkers game implemented in Python, structured to follow the SOLID principles. The project focuses on clarity, maintainability, and extensibility while keeping the core gameplay minimal and easy to run.
 
 ## Quick Start
 
