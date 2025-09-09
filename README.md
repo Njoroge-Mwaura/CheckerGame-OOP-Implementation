@@ -1,9 +1,10 @@
 # Checkers-OOP
 
-A simple, terminal-based Checkers game implemented in Python, structured to follow the SOLID principles. The project focuses on clarity, maintainability, and extensibility while keeping the core gameplay minimal and easy to run.
+A Checkers game implemented in Python with both console and graphical interfaces, structured to follow the SOLID principles. The project focuses on clarity, maintainability, and extensibility while keeping the core gameplay minimal and easy to run.
 
 ## Quick Start
 
+### Console Version
 ```bash
 python main.py
 ```
@@ -11,13 +12,34 @@ python main.py
 - During your turn, enter positions as two integers: `row col` (e.g., `2 5`).
 - To quit at any input prompt, type `GG`.
 
-## Project Structure (Core Files Only)
+### Graphical User Interface (GUI)
+```bash
+python gui/main.py
+```
 
-- `main.py`: Application entrypoint and minimal application orchestration
+- Click on a piece to select it (highlighted in blue)
+- Click on a valid destination to move the piece
+- Pieces that can capture are highlighted in red
+- The game automatically switches turns and checks for game over
+- Close the window to quit
+
+## Project Structure
+
+### Core Files
+- `main.py`: Console application entrypoint and minimal application orchestration
 - `match.py`: Game flow (turn loop, input handling, switching turns)
 - `board.py`: Board state, move rules, captures, display
 - `pieces.py`: Piece abstractions (`Piece`, `Man`, `King`)
 - `player.py`: Player state and queries (moves available, capture-capable pieces)
+
+### GUI Files
+- `gui/main.py`: GUI application entrypoint
+- `gui/controller.py`: Game controller managing user interactions and game flow
+- `gui/renderer.py`: Board rendering and visual display using Tkinter
+- `gui/__init__.py`: Package initialization
+
+### Legacy Files
+- `legacy/v2checkers.py`: Original implementation (for reference)
 
 ## SOLID Principles Applied
 
@@ -54,13 +76,44 @@ python main.py
 - OCP: Additional player logic (e.g., AI strategies) can be layered without modifying this file.
 - LSP: Any object with `pieces` and `color` that cooperates with `Board` methods can substitute.
 - ISP: Provides only focused behavior (has moves, pieces that can capture).
-- DIP: Depends only on `Board`’s public methods to compute availability of moves.
+- DIP: Depends only on `Board`'s public methods to compute availability of moves.
+
+## GUI Implementation
+
+The graphical interface is built using Tkinter and follows SOLID principles:
+
+### gui/controller.py
+- SRP: Manages user interactions, piece selection, move execution, and game flow.
+- OCP: Can be extended with new interaction patterns without modifying existing code.
+- LSP: Works with any board and player objects that implement the expected interface.
+- ISP: Uses only the methods it needs from Board and Player classes.
+- DIP: Depends on abstractions (Board, Player) rather than concrete implementations.
+
+### gui/renderer.py
+- SRP: Handles all visual rendering and coordinate transformations.
+- OCP: Can be extended with new visual styles or rendering methods.
+- LSP: Works with any board object that provides the expected data structure.
+- ISP: Provides focused rendering methods without mixing concerns.
+- DIP: Depends on board data structure rather than specific board implementation.
+
+### gui/main.py
+- SRP: Simple entry point that initializes the GUI application.
+- OCP: Can be extended to support different window configurations or themes.
+- LSP: Works with any controller that implements the expected interface.
+- ISP: Minimal interface - just initializes and runs the application.
+- DIP: Depends on controller abstraction rather than concrete implementation.
 
 ## Controls
 
+### Console Version
 - Select a piece: `row col` (e.g., `2 5`)
 - Select destination: `row col` (e.g., `3 4`)
 - Quit any time: `GG`
+
+### GUI Version
+- Select a piece: Click on the piece
+- Move piece: Click on destination square
+- Quit: Close the window or use window controls
 
 ## Notes
 
